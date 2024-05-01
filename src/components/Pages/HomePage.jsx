@@ -1,39 +1,38 @@
 /** @format */
-
-import { useState } from "react";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./HomePage.css";
 
 export function HomePage() {
-  const [text, setText] = useState("");
-  const [list, setList] = useState(["ready", "set", "GO!"]);
-
-  function onSubmit(event) {
-    event.preventDefault();
-
-    let newList = [...list, text];
-    setList(newList);
-    setText("");
-  }
-
   return (
-    <div>
-      <h1>Learning React</h1>
-
-      <form onSubmit={onSubmit}>
-        <input
-          type='text'
-          name='listitem'
-          id='listitem'
-          value={text}
-          onChange={event => setText(event.target.value)}
-        />
-        <button type='submit'>Add</button>
-      </form>
-
-      <ul>
-        {list.map((item, index) => {
-          return <li key={index}>{item}</li>;
-        })}
-      </ul>
+    <div className='home-page'>
+      <div className='header'>
+        <NavLink
+          to='/'
+          className='home-link'>
+          Home
+        </NavLink>{" "}
+        <h1 className='home-title'>
+          {"Studio Ghibli Movies".split(" ").map((word, wordIndex) => (
+            <React.Fragment key={wordIndex}>
+              {Array.from(word).map((char, charIndex) => (
+                <span
+                  key={charIndex}
+                  className='char'>
+                  {char}
+                </span>
+              ))}
+              {wordIndex < 2 && <span>&nbsp;</span>}
+            </React.Fragment>
+          ))}
+        </h1>{" "}
+        <NavLink
+          to='/films'
+          className='films-link'>
+          {" "}
+          Films
+        </NavLink>{" "}
+      </div>{" "}
     </div>
   );
 }

@@ -1,0 +1,178 @@
+/** @format */
+.films-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+}
+
+.films-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.filmsPage-title {
+  font-size: 6em;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  display: inline-block;
+
+}
+
+.films-header .home-link,
+.films-header .films-link {
+  position: relative;
+  margin: 0 20px;
+}
+
+.films-title {
+  font-size: 3em;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.films-page .char {
+  display: inline-block;
+  color: #fff;
+  transform-origin: bottom;
+}
+
+.films-page .char:hover {
+  transform: scale(1.4);
+  animation: colorchange 0.5s infinite;
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.films-page .char.clicked {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.8);
+  animation: colorchange 0.5s infinite;
+}
+
+.films-form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.films-form-group label {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 3px 3px 10px magenta;
+  margin-right: 10px;
+}
+
+.films-select {
+ margin-top: 10px;
+}
+
+.films-page .films-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.image-small {
+  float: left;
+  width: 200px;
+  height: auto;
+  margin-right: 30px;
+}
+
+.select-director-mess {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.film-info {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+  font-size: 2.2rem;
+  word-wrap: break-word;
+}
+
+.films-list-item {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.films-page .footer-char {
+  display: inline-block;
+  font-size: 5rem;
+  font-weight: 700;
+  animation: colorchange 1s linear infinite;
+  cursor: pointer;
+}
+
+.film-info {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+  text-align: left;
+}
+
+
+
+.films-page .footer-char.hidden {
+  visibility: hidden;
+}
+
+.films-page .char.hidden {
+  visibility: hidden;
+}
+
+@keyframes colorchange {
+  0% {
+    color: magenta;
+  }
+  15% {
+    color: yellow;
+  }
+  25% {
+    color: cyan;
+  }
+  35% {
+    color: orange;
+  }
+  50% {
+    color: blue;
+  }
+  65% {
+    color: purple;
+  }
+  75% {
+    color: green;
+  }
+  85% {
+    color: pink;
+  }
+  100% {
+    color: red;
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
