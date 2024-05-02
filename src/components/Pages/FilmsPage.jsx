@@ -1,51 +1,44 @@
 /** @format */
-import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { filterFilmsByDirector, getListOf } from "../helpers/film.helpers";
+
+import {useState, useEffect} from "react";
+import {NavLink} from "react-router-dom";
+import {filterFilmsByDirector, getListOf} from "../helpers/film.helpers";
 import "./FilmsPage.css";
 
 export function FilmsPage() {
-  const [list, setList] = useState([]);
+  const [films, setFilms] = useState([]);
   const [searchDirector, setSearchDirector] = useState("");
   const [filmsByDirector, setFilmsByDirector] = useState([]);
   const [directors, setDirectors] = useState([]);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [clickedChars, setClickedChars] = useState([]);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  function getFilms() {
-    fetch("https://studioghibliapi-d6fc8.web.app/films")
-      .then(res => res.json())
-      .then(films => setList(films))
-      .catch(err => console.error(err));
-  }
 
   useEffect(() => {
-    getFilms();
+    fetch("(link unavailable)")
+      .then(res => res.json())
+      .then(films => setFilms(films))
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {
-    const filteredFilms = filterFilmsByDirector(list, searchDirector);
+    const filteredFilms = filterFilmsByDirector(films, searchDirector);
     setFilmsByDirector(filteredFilms);
 
-    const directorsList = getListOf(list, "director");
+    const directorsList = getListOf(films, "director");
     setDirectors(directorsList);
-  }, [list, searchDirector]);
+  }, [films, searchDirector]);
 
   return (
-    <div className='films-page'>
-      <div className='films-header'>
+    <div className="films-page">
+      <div className="films-header">
         <NavLink
-          to='/'
-          className='home-link'
-          activeClassName='home-active-link'>
+          to="/"
+          className="home-link"
+          activeClassName="home-active-link"
+        >
           Home
         </NavLink>{" "}
-        <h1 className='filmsPage-title'>
+        <h1 className="filmsPage-title">
           {Array.from("Studio Ghibli Films").map((char, index) => (
             <span
               key={index}
@@ -54,43 +47,42 @@ export function FilmsPage() {
                 if (!clickedChars.includes(index)) {
                   setClickedChars([...clickedChars, index]);
                 }
-              }}>
+              }}
+            >
               {char}
             </span>
           ))}
         </h1>{" "}
         <NavLink
-          to='/films'
-          className='films-link'
-          activeClassName='films-active-link'>
+          to="/films"
+          className="films-link"
+          activeClassName="films-active-link"
+        >
           Films
         </NavLink>{" "}
-      </div>{" "}
+      </div>
       <form>
-        <div className='films-form-group'>
-          <div
-            className='director'
-            onClick={toggleDropdown}>
+        <div className="films-form-group">
+          <label className="director">
             Director:
-          </div>
-          {isDropdownOpen && (
             <select
-              className='films-select'
+              className="films-select"
               value={searchDirector}
-            onChange={event => {
-              event.stopProgagation();
-              setSearchDirector(event.target.value);
-            }}>
-              <option value=''>All</option>
+              onChange={event => {
+                setSearchDirector(event.target.value);
+              }}
+            >
+              <option value="">All</option>
               {directors.map(director => (
                 <option
                   key={director}
-                  value={director}>
+                  value={director}
+                >
                   {director}
                 </option>
               ))}
             </select>
-          )}
+          </label>
         </div>
       </form>
       {searchDirector ? (
@@ -103,29 +95,27 @@ export function FilmsPage() {
                 }`}
                 key={film.title}
                 onMouseEnter={() => setHoveredItem(index)}
-                onMouseLeave={() => setHoveredItem(null)}>
+                onMouseLeave={() => setHoveredItem(null)}
+              >
                 <img
-                  className='image-small'
+                  className="image-small"
                   src={film.image}
                   alt={film.title}
                 />
-                <div className='film-info'>
-                  <div className='film-title'>{film.title}</div>
-                  <div className='film-description'>{film.description}</div>
+                <div className="film-info">
+                  <div className="film-title">{film.title}</div>
+                  <div className="film-description">{film.description}</div>
                 </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p className='no-films-found'>No films found</p>
+          <p className="no-films-found">No films found</p>
         )
       ) : (
-        <p className='select-director-mess'>
-          {" "}
-          Select a director to view films{" "}
-        </p>
+        <p className="select-director-mess">Select a director to view films</p>
       )}
-      <footer className='films-footer'>
+      <footer className="films-footer">
         {Array.from("Studio Ghibli Films").map((char, index) => (
           <span
             key={index}
@@ -136,11 +126,12 @@ export function FilmsPage() {
               if (clickedChars.includes(index)) {
                 setClickedChars(clickedChars.filter(i => i !== index));
               }
-            }}>
+            }}
+          >
             {char}
           </span>
         ))}
-      </footer>{" "}
+      </footer>
     </div>
   );
 }

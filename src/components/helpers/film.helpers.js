@@ -10,11 +10,20 @@ export function filterFilmsByDirector(list, director) {
 }
 
 export function getListOf(list, prop) {
-  const uniqueValues = [];
-  list.forEach(item => {
-    if (!uniqueValues.includes(item[prop])) {
-      uniqueValues.push(item[prop]);
-    }
-  });
-  return uniqueValues;
+  if (prop === "director") {
+    const uniqueDirectors = [];
+    list.forEach(film => {
+      const director = film.director.toLowerCase();
+      if (!uniqueDirectors.includes(director)) {
+        uniqueDirectors.push(director);
+      }
+    });
+    return uniqueDirectors;
+  } else {
+    const uniqueValues = new Set();
+    list.forEach(item => {
+      uniqueValues.add(item[prop].toLowerCase());
+    });
+    return Array.from(uniqueValues);
+  }
 }
